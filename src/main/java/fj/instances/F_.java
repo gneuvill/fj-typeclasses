@@ -4,8 +4,8 @@ import fj.*;
 import fj.data.Either;
 import fj.typeclasses.control.Category;
 import fj.typeclasses.control.Monad;
-import fj.typeclasses.data.Profunctor.Choice;
-import fj.typeclasses.data.Profunctor.Strong;
+import fj.typeclasses.data.profunctor.Choice;
+import fj.typeclasses.data.profunctor.Strong;
 import org.derive4j.hkt.__;
 
 public final class F_ {
@@ -68,12 +68,12 @@ public final class F_ {
 
     @Override
     public <A, B, C> F<Either<A, C>, Either<B, C>> left(__<__<F.µ, A>, B> pab) {
-      return null;
+      return ei -> ei.either(a -> Either.left(_Fj.asF(pab).f(a)), Either::right);
     }
 
     @Override
     public <A, B, C> F<Either<A, B>, Either<A, C>> right(__<__<F.µ, B>, C> pab) {
-      return ;
+      return ei -> Either_.<A>instances().map(_Fj.asF(pab), ei);
     }
   }
 }
