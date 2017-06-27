@@ -1,7 +1,9 @@
-package fj.typeclasses.data.profunctor;
+package fj.data.profunctor;
 
 import fj.F;
-import fj.typeclasses.control.Category;
+import fj.F1W;
+import fj._Fj;
+import fj.control.Category;
 import org.derive4j.hkt.__;
 import org.derive4j.hkt.__2;
 
@@ -23,5 +25,14 @@ public interface Profunctor<p> {
     return rmap(f, C.id());
   }
 
+  static FProfunctor f() { return () -> {}; }
 
+  interface FProfunctor extends Profunctor<F.µ> {
+    void self();
+
+    @Override
+    default <A, B, C, D> F<A, D> dimap(F<A, B> a2b, F<C, D> c2d, __<__<F.µ, B>, C> b2c) {
+      return F1W.lift(c2d).o(_Fj.asF(b2c)).o(a2b);
+    }
+  }
 }

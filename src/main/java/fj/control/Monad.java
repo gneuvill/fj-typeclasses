@@ -1,8 +1,11 @@
-package fj.typeclasses.control;
+package fj.control;
 
 import fj.F;
+import fj.F0;
 import fj.Unit;
-import fj.typeclasses.syntax.Do;
+import fj.data.Either;
+import fj.data.List;
+import fj.syntax.Do;
 import org.derive4j.hkt.__;
 
 public interface Monad<m> extends Applicative<m>, Bind<m> {
@@ -31,4 +34,20 @@ public interface Monad<m> extends Applicative<m>, Bind<m> {
       , () -> mb
       , b -> unless(b, m));
   }
+
+  static F0Monad f0() { return () -> {}; }
+
+  static <A> FMonad<A> f() { return () -> {}; }
+
+  static <A> EitherMonad<A> either() { return () -> {}; }
+
+  static ListMonad list() { return () -> {}; }
+
+  interface F0Monad extends Monad<F0.µ>, F0Applicative, F0Bind {}
+
+  interface FMonad<X> extends Monad<__<F.µ, X>>, FApplicative<X>, FBind<X> {}
+
+  interface EitherMonad<X> extends Monad<__<Either.µ, X>>, EitherApplicative<X>, EitherBind<X> {}
+
+  interface ListMonad extends Monad<List.µ>, ListApplicative, ListBind {}
 }

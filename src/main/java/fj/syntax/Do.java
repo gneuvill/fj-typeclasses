@@ -1,10 +1,10 @@
-package fj.typeclasses.syntax;
+package fj.syntax;
 
 import fj.F;
 import fj.F0;
 import fj.F2;
 import fj.P2;
-import fj.typeclasses.control.Bind;
+import fj.control.Bind;
 import org.derive4j.hkt.TypeEq;
 import org.derive4j.hkt.__;
 
